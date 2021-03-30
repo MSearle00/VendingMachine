@@ -25,7 +25,7 @@ namespace VendingMachine
                 case "£1": return 100;
                 case "200":
                 case "£2": return 200;
-                default: return -1; // Not valid
+                default: return 0;
             }
         }
 

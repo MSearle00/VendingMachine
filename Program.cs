@@ -18,12 +18,11 @@ namespace VendingMachine
                 if (modeSelection == "restocking")
                 {
                     Console.WriteLine("Please enter the password");
-                    //the password is password
                     string password = Console.ReadLine();
                     if (password == "password")
                     {
-                        productMgr.ClearStocks();  // Clears all the stocks
-                        initInventory();     // re-stocks everything
+                        productMgr.ClearStocks();
+                        initInventory();     
                         Console.WriteLine("You have now re-stocked the machine!");
                         System.Threading.Thread.Sleep(5000);
                         Console.Clear();
@@ -37,7 +36,6 @@ namespace VendingMachine
                 {
                     productMgr.PrintMenu(financeMgr);
 
-                    // Enter money
                     int insertedCoins = financeMgr.AcceptCoins();
 
                     Console.WriteLine("Current balance: {0}.", financeMgr.Format(insertedCoins));
@@ -49,7 +47,7 @@ namespace VendingMachine
                         string slotInput = ReadInput("Enter a product slot");
 
                         if (Int32.TryParse(slotInput, out selectedSlot) && productMgr.IsSlotValid(selectedSlot))
-                            break; // Slot is valid, exit while loop
+                            break;
                         Console.WriteLine("Entered slot number is invalid. Please try again.");
                     }
                     var product = productMgr.GetProduct(selectedSlot);
@@ -66,6 +64,9 @@ namespace VendingMachine
                         if (productMgr.Dispense(selectedSlot))
                         {
                             Console.WriteLine("Your change is {0}.", financeMgr.Format(remaining));
+                            /* 
+                             *  Find a way to add "Do you want to buy anything else?" Before giving change.
+                             */
                         }
                         else
                         {
